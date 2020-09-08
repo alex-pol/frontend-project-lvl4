@@ -22,7 +22,7 @@ const ChannelItem = ({ channel, onRemove, onEdit }) => {
     dispatch(modalActions.openEditModal());
   };
   return (
-    <ListGroup.Item active={isActive} key={id} onClick={onClick}>
+    <ListGroup.Item active={isActive} onClick={onClick}>
       <div className="d-flex align-items-center">
         {name}
         {removable && (

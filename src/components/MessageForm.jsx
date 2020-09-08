@@ -4,12 +4,15 @@ import axios from 'axios';
 import { Form, FormControl } from 'react-bootstrap';
 import { DataContext } from '../store';
 import routes from '../routes';
+import { useSelector } from "react-redux";
+import { getActiveChannel } from "../store/selectors";
 
 const initialValues = {
   message: '',
 };
 
-const MessageForm = ({ channel }) => {
+const MessageForm = () => {
+  const channel = useSelector(getActiveChannel);
   const { userName } = useContext(DataContext);
   const input = useRef(null);
   const onSubmit = async ({ message }, { resetForm, setStatus }) => {
