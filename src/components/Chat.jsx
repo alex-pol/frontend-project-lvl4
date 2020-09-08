@@ -16,9 +16,7 @@ const Chat = () => {
   const messages = useSelector(getMessages);
   return (
     <div className="pb-3 d-flex flex-column h-100">
-      <div>
-        {messages.map(renderMessage)}
-      </div>
+      <div>{messages.map(renderMessage)}</div>
       <div className="mt-auto">
         <MessageForm channel={channel} />
       </div>

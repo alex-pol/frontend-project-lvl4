@@ -5,6 +5,7 @@ import faker from 'faker';
 import gon from 'gon';
 import channelSlice from './slices/channels';
 import messagesSlice from './slices/messages';
+import modalsSlice from './slices/modals';
 
 export const DataContext = createContext({});
 
@@ -15,7 +16,11 @@ const initStore = (data) => {
     messages: data.messages,
   };
   const store = configureStore({
-    reducer: combineReducers({ channels: channelSlice.reducer, messages: messagesSlice.reducer }),
+    reducer: combineReducers({
+      channels: channelSlice.reducer,
+      messages: messagesSlice.reducer,
+      modals: modalsSlice.reducer,
+    }),
     preloadedState,
   });
   cookies.set('slack-username', userName);

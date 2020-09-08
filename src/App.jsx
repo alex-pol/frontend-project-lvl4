@@ -6,8 +6,12 @@ import Chat from './components/Chat';
 const App = () => (
   <Container className="h-100">
     <Row className="h-100">
-      <Col className="h-100" xs={3}><Channels /></Col>
-      <Col className="h-100"><Chat /></Col>
+      <Col className="h-100 border-right" xs={3}>
+        <Channels />
+      </Col>
+      <Col className="h-100">
+        <Chat />
+      </Col>
     </Row>
   </Container>
 );
