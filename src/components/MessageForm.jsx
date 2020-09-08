@@ -2,10 +2,10 @@ import React, { useContext, useRef } from 'react';
 import { useFormik } from 'formik';
 import axios from 'axios';
 import { Form, FormControl } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 import { DataContext } from '../store';
 import routes from '../routes';
-import { useSelector } from "react-redux";
-import { getActiveChannel } from "../store/selectors";
+import { getActiveChannel } from '../store/selectors';
 
 const initialValues = {
   message: '',
