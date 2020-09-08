@@ -15,20 +15,18 @@ const slice = createSlice({
     },
     removeChannel(state, { payload: channelId }) {
       const removedIdx = findIndex(propEq('id', channelId), state.list);
-      if (removedIdx !== -1) {
-        state.list.splice(removedIdx, 1);
-        if (state.activeChannel === channelId) {
-          state.activeChannel = state.list.length
-            ? state.list[removedIdx % state.list.length].id
-            : null;
-        }
+      if (removedIdx === -1) return;
+      state.list.splice(removedIdx, 1);
+      if (state.activeChannel === channelId) {
+        state.activeChannel = state.list.length
+          ? state.list[removedIdx % state.list.length].id
+          : null;
       }
     },
     updateChannel(state, { payload }) {
       const updatedIdx = findIndex(propEq('id', payload.id), state.list);
-      if (updatedIdx !== -1) {
-        state.list.splice(updatedIdx, 1, payload);
-      }
+      if (updatedIdx === -1) return;
+      state.list.splice(updatedIdx, 1, payload);
     },
   },
 });

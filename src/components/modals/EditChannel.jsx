@@ -43,7 +43,7 @@ const EditChannelModal = ({ channelId }) => {
   });
   return (
     <Modal show onHide={onClose}>
-      <Modal.Header closeButton>Add channel</Modal.Header>
+      <Modal.Header closeButton>Edit channel</Modal.Header>
       <Modal.Body>
         <Form id="saveChannelForm" onSubmit={handleSubmit}>
           <Form.Control
