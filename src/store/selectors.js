@@ -1,11 +1,11 @@
-import { find, filter, propEq } from 'lodash/fp';
-
 export const getActiveChannel = (state) => {
   const { list, activeChannel } = state.channels;
-  return find(propEq('id', activeChannel), list);
+  return list.find((channel) => channel.id === activeChannel);
 };
 
 export const getMessages = (state) => {
   const { activeChannel } = state.channels;
-  return filter(propEq('channelId', activeChannel), state.messages);
+  return state.messages.filter(
+    (message) => message.channelId === activeChannel,
+  );
 };

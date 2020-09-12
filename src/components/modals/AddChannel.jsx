@@ -51,6 +51,7 @@ const AddChannelModal = () => {
             disabled={isSubmitting}
             autoFocus
             isInvalid={Boolean(status)}
+            aria-label="newChannelInput"
           />
           <Form.Control.Feedback type="invalid">{status}</Form.Control.Feedback>
         </Form>
@@ -59,7 +60,12 @@ const AddChannelModal = () => {
         <Button variant="secondary" onClick={onClose}>
           Close
         </Button>
-        <Button variant="primary" type="submit" form="addChannelForm">
+        <Button
+          aria-label="submitChannelForm"
+          variant="primary"
+          type="submit"
+          form="addChannelForm"
+        >
           Add
         </Button>
       </Modal.Footer>

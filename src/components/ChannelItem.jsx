@@ -27,7 +27,12 @@ const ChannelItem = ({ channel, onRemove, onEdit }) => {
         {name}
         {removable && (
           <div className="ml-auto">
-            <Button size="sm" variant="link" onClick={handleEdit}>
+            <Button
+              size="sm"
+              variant="link"
+              aria-label="editChannel"
+              onClick={handleEdit}
+            >
               edit
             </Button>
             <Button
@@ -35,6 +40,7 @@ const ChannelItem = ({ channel, onRemove, onEdit }) => {
               variant="link"
               onClick={handleRemove}
               style={{ color: 'red' }}
+              aria-label="removeChannel"
             >
               X
             </Button>

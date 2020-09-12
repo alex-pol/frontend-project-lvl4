@@ -43,7 +43,7 @@ const MessageForm = () => {
     onSubmit,
   });
   return (
-    <Form noValidate onSubmit={handleSubmit}>
+    <Form name="messageForm" role="form" aria-label="messageForm" noValidate onSubmit={handleSubmit}>
       <FormControl
         ref={input}
         placeholder="Enter message"
@@ -53,6 +53,8 @@ const MessageForm = () => {
         disabled={isSubmitting}
         autoFocus
         isInvalid={Boolean(status)}
+        aria-label="message"
+        role="textbox"
       />
       <Form.Control.Feedback type="invalid">{status}</Form.Control.Feedback>
     </Form>

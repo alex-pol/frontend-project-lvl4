@@ -25,7 +25,12 @@ const RemoveChannelModal = ({ channelId }) => {
         <Button variant="secondary" onClick={onClose}>
           Cancel
         </Button>
-        <Button variant="primary" onClick={onConfirm} disabled={isDeleting}>
+        <Button
+          aria-label="confirmBtn"
+          variant="primary"
+          onClick={onConfirm}
+          disabled={isDeleting}
+        >
           Confirm
         </Button>
       </Modal.Footer>

@@ -30,7 +30,7 @@ const Channels = () => {
     <div>
       <div className="mb-2 d-flex justify-content-between align-items-center">
         <h5 className="mb-0">Channels</h5>
-        <Button variant="link" onClick={openNewModal}>
+        <Button variant="link" data-testid="openNewChannelBtn" onClick={openNewModal}>
           <h5>+</h5>
         </Button>
       </div>

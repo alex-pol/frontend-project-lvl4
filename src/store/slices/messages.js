@@ -13,4 +13,6 @@ const slice = createSlice({
   },
 });
 
+export const { addMessage } = slice.actions;
+
 export default slice;

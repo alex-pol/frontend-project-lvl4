@@ -54,6 +54,7 @@ const EditChannelModal = ({ channelId }) => {
             disabled={isSubmitting}
             autoFocus
             isInvalid={Boolean(status)}
+            aria-label="editChannelInput"
           />
           <Form.Control.Feedback type="invalid">{status}</Form.Control.Feedback>
         </Form>
@@ -62,7 +63,7 @@ const EditChannelModal = ({ channelId }) => {
         <Button variant="secondary" onClick={onClose}>
           Close
         </Button>
-        <Button variant="primary" type="submit" form="saveChannelForm">
+        <Button aria-label="confirmBtn" variant="primary" type="submit" form="saveChannelForm">
           Save
         </Button>
       </Modal.Footer>
