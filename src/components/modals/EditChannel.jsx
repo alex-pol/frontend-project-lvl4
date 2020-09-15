@@ -4,15 +4,15 @@ import { useFormik } from 'formik';
 import axios from 'axios';
 import { get, find, propEq } from 'lodash/fp';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import routes from '../../routes';
 import { updateChannel } from '../../store/slices/channels';
-import { closeEditModal } from '../../store/slices/modals';
 
-const EditChannelModal = ({ channelId }) => {
+const EditChannelModal = ({ onClose, channelId }) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const { list } = useSelector(get('channels'));
   const channel = find(propEq('id', channelId), list);
-  const onClose = () => dispatch(closeEditModal());
   const onSubmit = async ({ name }, { setStatus }) => {
     if (!name) return;
     const data = {
@@ -43,7 +43,7 @@ const EditChannelModal = ({ channelId }) => {
   });
   return (
     <Modal show onHide={onClose}>
-      <Modal.Header closeButton>Edit channel</Modal.Header>
+      <Modal.Header closeButton>{t('editChannelTitle')}</Modal.Header>
       <Modal.Body>
         <Form id="saveChannelForm" onSubmit={handleSubmit}>
           <Form.Control
@@ -61,10 +61,10 @@ const EditChannelModal = ({ channelId }) => {
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={onClose}>
-          Close
+          {t('close')}
         </Button>
         <Button aria-label="confirmBtn" variant="primary" type="submit" form="saveChannelForm">
-          Save
+          {t('save')}
         </Button>
       </Modal.Footer>
     </Modal>

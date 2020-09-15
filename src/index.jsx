@@ -16,14 +16,16 @@ if (process.env.NODE_ENV !== 'production') {
   localStorage.debug = 'chat:*';
 }
 
+// eslint-disable-next-line import/prefer-default-export
 export const socket = initSocket();
-export const { store, context } = init(gon, socket);
 
-render(
-  <Provider store={store}>
-    <DataContext.Provider value={context}>
-      <App />
-    </DataContext.Provider>
-  </Provider>,
-  document.getElementById('chat'),
-);
+init(gon, socket).then(({ store, context }) => {
+  render(
+    <Provider store={store}>
+      <DataContext.Provider value={context}>
+        <App />
+      </DataContext.Provider>
+    </Provider>,
+    document.getElementById('chat'),
+  );
+});

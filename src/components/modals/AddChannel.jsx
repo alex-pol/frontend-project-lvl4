@@ -3,13 +3,13 @@ import { Button, Modal, Form } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import routes from '../../routes';
 import { addChannel } from '../../store/slices/channels';
-import { closeNewModal } from '../../store/slices/modals';
 
-const AddChannelModal = () => {
+const AddChannelModal = ({ onClose }) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
-  const onClose = () => dispatch(closeNewModal());
   const onSubmit = async ({ name }, { setStatus }) => {
     if (!name) return;
     const data = {
@@ -40,7 +40,7 @@ const AddChannelModal = () => {
   });
   return (
     <Modal show onHide={onClose}>
-      <Modal.Header closeButton>Add channel</Modal.Header>
+      <Modal.Header closeButton>{t('addChannelTitle')}</Modal.Header>
       <Modal.Body>
         <Form id="addChannelForm" onSubmit={handleSubmit}>
           <Form.Control
@@ -58,7 +58,7 @@ const AddChannelModal = () => {
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={onClose}>
-          Close
+          {t('close')}
         </Button>
         <Button
           aria-label="submitChannelForm"
@@ -66,7 +66,7 @@ const AddChannelModal = () => {
           type="submit"
           form="addChannelForm"
         >
-          Add
+          {t('add')}
         </Button>
       </Modal.Footer>
     </Modal>

@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import routes from '../../routes';
 import { removeChannel } from '../../store/slices/channels';
-import { closeRemoveModal } from '../../store/slices/modals';
 
-const RemoveChannelModal = ({ channelId }) => {
+const RemoveChannelModal = ({ onClose, channelId }) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
-  const onClose = () => dispatch(closeRemoveModal());
   const [isDeleting, setDeleting] = useState(false);
   const onConfirm = async () => {
     setDeleting(true);
@@ -19,11 +19,11 @@ const RemoveChannelModal = ({ channelId }) => {
   };
   return (
     <Modal show onHide={onClose}>
-      <Modal.Header closeButton>Remove channel</Modal.Header>
-      <Modal.Body>Are you sure?</Modal.Body>
+      <Modal.Header closeButton>{t('removeChannelTitle')}</Modal.Header>
+      <Modal.Body>{t('actionConfirmation')}</Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={onClose}>
-          Cancel
+          {t('cancel')}
         </Button>
         <Button
           aria-label="confirmBtn"
@@ -31,7 +31,7 @@ const RemoveChannelModal = ({ channelId }) => {
           onClick={onConfirm}
           disabled={isDeleting}
         >
-          Confirm
+          {t('confirm')}
         </Button>
       </Modal.Footer>
     </Modal>

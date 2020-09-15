@@ -5,38 +5,20 @@ import { createSlice } from '@reduxjs/toolkit';
 const slice = createSlice({
   name: 'modals',
   initialState: {
-    newModal: false,
-    removeModal: false,
-    editModal: false,
+    type: null,
+    modalProps: null,
   },
   reducers: {
-    openNewModal(state) {
-      state.newModal = true;
+    openModal(state, { payload }) {
+      state.type = payload.type;
+      state.modalProps = payload.modalProps;
     },
-    closeNewModal(state) {
-      state.newModal = false;
-    },
-    openRemoveModal(state) {
-      state.removeModal = true;
-    },
-    closeRemoveModal(state) {
-      state.removeModal = false;
-    },
-    openEditModal(state) {
-      state.editModal = true;
-    },
-    closeEditModal(state) {
-      state.editModal = false;
+    closeModal(state) {
+      state.type = null;
+      state.modalProps = null;
     },
   },
 });
 export const { actions } = slice;
-export const {
-  openNewModal,
-  closeNewModal,
-  openRemoveModal,
-  closeRemoveModal,
-  openEditModal,
-  closeEditModal,
-} = slice.actions;
+export const { openModal, closeModal } = slice.actions;
 export default slice;

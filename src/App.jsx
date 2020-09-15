@@ -3,6 +3,7 @@ import { Col, Container, Row } from 'react-bootstrap';
 import Rollbar from 'rollbar';
 import Channels from './components/Channels';
 import Chat from './components/Chat';
+import ModalManager from './components/modals/ModalManager';
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -23,6 +24,7 @@ const App = () => (
         <Chat />
       </Col>
     </Row>
+    <ModalManager />
   </Container>
 );
 

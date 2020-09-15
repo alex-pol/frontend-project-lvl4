@@ -3,9 +3,10 @@ import { Button, ListGroup } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { get } from 'lodash/fp';
 import { selectChannel } from '../store/slices/channels';
-import { actions as modalActions } from '../store/slices/modals';
+import { openModal } from '../store/slices/modals';
+import { modalType } from './modals/ModalManager';
 
-const ChannelItem = ({ channel, onRemove, onEdit }) => {
+const ChannelItem = ({ channel }) => {
   const { activeChannel } = useSelector(get('channels'));
   const dispatch = useDispatch();
   const { id, name, removable } = channel;
@@ -13,13 +14,18 @@ const ChannelItem = ({ channel, onRemove, onEdit }) => {
   const onClick = () => dispatch(selectChannel(id));
   const handleRemove = (e) => {
     e.stopPropagation();
-    onRemove(id);
-    dispatch(modalActions.openRemoveModal());
+    dispatch(
+      openModal({
+        type: modalType.REMOVE_CHANNEL,
+        modalProps: { channelId: id },
+      }),
+    );
   };
   const handleEdit = (e) => {
     e.stopPropagation();
-    onEdit(id);
-    dispatch(modalActions.openEditModal());
+    dispatch(
+      openModal({ type: modalType.EDIT_CHANNEL, modalProps: { channelId: id } }),
+    );
   };
   return (
     <ListGroup.Item active={isActive} onClick={onClick}>

@@ -24,7 +24,7 @@ let mockServer; //eslint-disable-line
 const host = 'http://localhost';
 const socketHost = 'ws://localhost';
 
-beforeEach(() => {
+beforeEach(async () => {
   if (mockServer) {
     mockServer.stop();
   }
@@ -43,7 +43,7 @@ beforeEach(() => {
     ],
     messages: [],
   };
-  const { store, context } = init(data, mockClient);
+  const { store, context } = await init(data, mockClient);
 
   render(
     <Provider store={store}>
@@ -64,7 +64,7 @@ test('add channel', async () => {
         attributes: { name: 'test channel', removable: true, id: 3 },
       },
     });
-  const newChannelBtn = screen.getByTestId('openNewChannelBtn');
+  const newChannelBtn = screen.getByRole('button', { name: 'openNewChannelBtn' });
   await userEvent.click(newChannelBtn);
   await act(async () => {
     const input = screen.getByRole('textbox', { name: 'newChannelInput' });

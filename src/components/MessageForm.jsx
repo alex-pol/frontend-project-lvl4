@@ -3,20 +3,25 @@ import { useFormik } from 'formik';
 import axios from 'axios';
 import { Form, FormControl } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
+import * as yup from 'yup';
+import { useTranslation } from 'react-i18next';
 import { DataContext } from '../store';
 import routes from '../routes';
 import { getActiveChannel } from '../store/selectors';
 
-const initialValues = {
-  message: '',
-};
+const validationSchema = yup.object().shape({
+  message: yup.string().required(),
+});
 
 const MessageForm = () => {
+  const { t } = useTranslation();
+  const initialValues = {
+    message: '',
+  };
   const channel = useSelector(getActiveChannel);
   const { userName } = useContext(DataContext);
   const input = useRef(null);
   const onSubmit = async ({ message }, { resetForm, setStatus }) => {
-    if (!message) return;
     const data = {
       attributes: {
         message,
@@ -29,7 +34,7 @@ const MessageForm = () => {
       resetForm();
       input.current.focus();
     } catch (e) {
-      setStatus(e.message || 'Some error');
+      setStatus(e.message || t('errors.general'));
     }
   };
   const {
@@ -41,12 +46,19 @@ const MessageForm = () => {
   } = useFormik({
     initialValues,
     onSubmit,
+    validationSchema,
   });
   return (
-    <Form name="messageForm" role="form" aria-label="messageForm" noValidate onSubmit={handleSubmit}>
+    <Form
+      name="messageForm"
+      role="form"
+      aria-label="messageForm"
+      noValidate
+      onSubmit={handleSubmit}
+    >
       <FormControl
         ref={input}
-        placeholder="Enter message"
+        placeholder={t('messageForm.inputPlaceholder')}
         onChange={handleChange}
         value={values.message}
         name="message"

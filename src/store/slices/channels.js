@@ -1,5 +1,4 @@
 /* eslint-disable no-param-reassign */
-import { findIndex, propEq } from 'lodash/fp';
 import { createSlice } from '@reduxjs/toolkit';
 
 const slice = createSlice({
@@ -14,19 +13,12 @@ const slice = createSlice({
       state.activeChannel = payload.id;
     },
     removeChannel(state, { payload: channelId }) {
-      const removedIdx = findIndex(propEq('id', channelId), state.list);
-      if (removedIdx === -1) return;
-      state.list.splice(removedIdx, 1);
-      if (state.activeChannel === channelId) {
-        state.activeChannel = state.list.length
-          ? state.list[removedIdx % state.list.length].id
-          : null;
-      }
+      state.list = state.list.filter(({ id }) => channelId !== id);
+      state.activeChannel = state.list.length ? state.list[0].id : null;
     },
     updateChannel(state, { payload }) {
-      const updatedIdx = findIndex(propEq('id', payload.id), state.list);
-      if (updatedIdx === -1) return;
-      state.list.splice(updatedIdx, 1, payload);
+      const channel = state.list.find(({ id }) => id === payload.id);
+      channel.name = payload.name;
     },
   },
 });
